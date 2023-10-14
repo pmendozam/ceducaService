@@ -1,10 +1,12 @@
 <?php
 class Conexion extends PDO
 {
-	private $hostBd = 'localhost';
-	private $nombreBd = 'ceduca_bd';
-	private $usuarioBd = 'root';
-	private $passwordBd = '';
+	private $hostBd = 'server0751.hostilimitado.com';
+	private $nombreBd = 'avilades_ceduca_bd';
+	private $usuarioBd = 'avilades_ceduca_user';
+	private $passwordBd = 'adminUmg23..#';
+
+
 
 	public function __construct()
 	{
