@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datos</title>
+</head>
+
+<body>
+    <pre id="datos-container"></pre>
+
+    <script>
+        // Función para realizar la solicitud AJAX y mostrar los datos
+        function mostrarDatos() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "datos.php", true);
+
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    var datos = JSON.parse(xhr.responseText);
+                    var container = document.getElementById("datos-container");
+
+                    // Mostrar los datos en formato JSON con sangría
+                    container.textContent = JSON.stringify(datos, null, 4);
+                }
+            };
+
+            xhr.send();
+        }
+
+        // Llamar a la función para mostrar los datos cuando se cargue la página
+        window.onload = mostrarDatos;
+    </script>
+</body>
+
+</html>
