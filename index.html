@@ -9,29 +9,34 @@
 </head>
 
 <body>
-    <pre id="datos-container"></pre>
+    <div id="resultados">
+        <!-- Aquí se mostrarán los resultados -->
+    </div>
 
     <script>
-        // Función para realizar la solicitud AJAX y mostrar los datos
-        function mostrarDatos() {
-            var xhr = new XMLHttpRequest();
-            xhr.open("GET", "datos.php", true);
-
-            xhr.onload = function () {
-                if (xhr.status === 200) {
-                    var datos = JSON.parse(xhr.responseText);
-                    var container = document.getElementById("datos-container");
-
-                    // Mostrar los datos en formato JSON con sangría
-                    container.textContent = JSON.stringify(datos, null, 4);
+        // Tu código JavaScript para realizar la solicitud
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'datos.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                try {
+                    var response = JSON.parse(xhr.responseText);
+                    mostrarResultados(response); // Llama a la función para mostrar los resultados
+                } catch (error) {
+                    console.error('Error al analizar la respuesta JSON', error);
                 }
-            };
+            } else {
+                console.error('Error en la solicitud:', xhr.status);
+            }
+        };
+        xhr.send();
 
-            xhr.send();
+        // Función para mostrar los resultados en la página
+        function mostrarResultados(data) {
+            var resultadosDiv = document.getElementById('resultados');
+            resultadosDiv.innerHTML = JSON.stringify(data, null, 2);
         }
-
-        // Llamar a la función para mostrar los datos cuando se cargue la página
-        window.onload = mostrarDatos;
     </script>
 </body>
 
