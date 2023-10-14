@@ -8,9 +8,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 	$sql = $pdo->prepare("SELECT * FROM grado ");
 	$sql->execute();
 	$sql->setFetchMode(PDO::FETCH_ASSOC);
-	header("HTTP/1.1 200 hay datos");
+
+	// Establece el encabezado Content-Type
+	header('Content-Type: application/json');
+
 	echo json_encode($sql->fetchAll());
 	exit;
 }
-
 ?>
